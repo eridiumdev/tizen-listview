@@ -1,0 +1,30 @@
+.popup-content-padding {
+	padding: 18px 24px;
+}
+
+.thumbnail {
+    display: inline-block;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 45px;
+    background: black;
+    color: white;
+}
+
+.contact-text {
+    margin-left: 15px;
+}
+
+.ui-scrollview-view {
+	background-color: white;
+}
+
+
+#back-button {
+	text-align: center;
+}
+
+#back-button > a {
+	color: white;
+	background-color: black;
+}
