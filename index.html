@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="./lib/tau/mobile/theme/default/tau.css">
     <link rel="stylesheet" type="text/css" href="./css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css"/>
     <title>Tizen Listview</title>
 </head>
 <body>
@@ -12,19 +13,17 @@
             <h1>Contacts</h1>
         </div>
         <div class="ui-content">
-            <ul id="listview" class="ui-listview"></ul>
+            <div id="loading" hidden><span class="fa fa-spinner fa-pulse fa-3x fa-fw"></span></div>
+            <ul id="listview" class="ui-listview" hidden></ul>
         </div>
     </div>
 
     <div id="contact-page" class="ui-page">
-        <div class="ui-header">
-            <h1>Contact Details</h1>
-        </div>
         <div id="contact-info" class="ui-content"">
-            <h2 id="fname">name</h2>
-            <h3 id="lname">lname</h3>
-            <h3 id="phone">phone</h3>
-            <p id="back-button"><a href="#list-page" class="ui-btn ui-inline">Back to contacts</a></p>
+            <div id="contact-pic">pic</div>
+            <div id="contact-name"><span class="fa fa-user contact-icon"></span><span class="contact-text"></span></div>
+            <div id="contact-phone"><span class="fa fa-phone contact-icon"></span><span class="contact-text"></span></div>
+            <p id="back-button"><a href="#" class="ui-btn ui-inline">Back to contacts</a></p>
         </div>
     </div>  
     

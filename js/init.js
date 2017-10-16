@@ -17,10 +17,13 @@ contacts[7] = new Contact('Sage', 'Wieser', '123-456-789');
 contacts[8] = new Contact('Kris', 'Marrier', '123-456-789');
 contacts[9] = new Contact('Minna', 'Amigon', '123-456-789');
 
-var listview = document.getElementById('listview');
-var contactPage = document.getElementById('contact-page');
-var contactFName = document.getElementById('fname');
-var contactLName = document.getElementById('lname');
-var contactPhone = document.getElementById('phone');
+var listview = $('#listview');
+var contactPic = $('#contact-pic');
+var contactName = $('#contact-name .contact-text');
+var contactPhone = $('#contact-phone .contact-text');
 
 createDb(contacts);
+
+$('#back-button').click(function() {
+	window.history.back();
+});

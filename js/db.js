@@ -6,34 +6,50 @@ var dbSize = 2 * 1024 * 1024;
 
 function createDb(contacts) {
     if (window.openDatabase) {
-        // openDatabase(name, version, displayname, estimatedsize, callback);
+    	// Open or create new database
+    	// openDatabase(name, version, displayname, estimatedsize, callback);
         db = openDatabase(dbName, version, dbDisplayName, dbSize);
-
-        // Recreate contacts table
+        
         dropContactsTable(db);
-        createContactsTable(db);
-
-        // Populate contacts table
-        for (var i = 0; i < contacts.length; i++) {
-            insertContact(db, contacts[i]);
-        }
-
-        displayContacts(db);
-
+        
+        // Create and populate contacts table if it does not exist
+        checkNotExists(db, 'contacts', function(notExists) {
+        	loadingStart();			// loading icon
+        	
+        	createContactsTable(db);
+            for (var i = 0; i < contacts.length; i++) {
+                insertContact(db, contacts[i]);
+            }
+            
+            displayContacts(db);	// populate listview with contacts
+        });
     } else {
         alert("Web SQL Database not supported in this browser");
     }
 }
 
+function checkNotExists(db, table, callback) {
+	db.readTransaction(function (t) {
+        t.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", [table],
+        	function(tran, r) {
+        		console.log('1');
+        		if (r.rows.length === 0) callback();
+        		else displayContacts(db);
+        	},
+        	function (t, e) { alert("Error:" + e.message); }
+        );
+    });
+}
+
 function dropContactsTable(db) {
     db.transaction(function (t) {
-        t.executeSql("DROP TABLE contacts");
+        t.executeSql("DROP TABLE IF EXISTS contacts");
     });
 }
 
 function createContactsTable(db) {
     db.transaction(function (t) {
-        t.executeSql("CREATE TABLE contacts (id INTEGER PRIMARY KEY, fname TEXT, lname TEXT, phone TEXT)", []);
+        t.executeSql("CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, fname TEXT, lname TEXT, phone TEXT)", []);
     });
 }
 
@@ -49,7 +65,7 @@ function onError(e) {}
 
 function displayContacts(db) {
     db.transaction(function (t) {
-        t.executeSql("SELECT * FROM contacts", [],
+        t.executeSql("SELECT * FROM contacts ORDER BY fname", [],
         	function (tran, r) {
 	            for (var i = 0; i < r.rows.length; i++) {
 	            	var id = r.rows.item(i).id;
@@ -73,14 +89,14 @@ function displayContacts(db) {
 	                // thumbnail (fname-lname first letters)
 	                // TODO change to profile pic
 	                let pic = document.createElement('span');
-	                pic.className = 'thumbnail';
+	                pic.className = 'listview-thumbnail';
 	                let fnameLetter = fname.substr(0,1);
 	                let lnameLetter = lname.substr(0,1);
 	                pic.textContent = fnameLetter + lnameLetter;
 	
 	                // displayed name
 	                let span = document.createElement('span');
-	                span.className = 'contact-text';
+	                span.className = 'listview-text';
 	                span.textContent = fname + ' ' + lname;
 	
 	                a.append(pic);
@@ -91,7 +107,17 @@ function displayContacts(db) {
 	        },
 	    	function (t, e) { alert("Error:" + e.message); }
         );
+        loadingFinish();
     });
+}
+
+function loadingStart() {
+	$('#loading').show();
+}
+
+function loadingFinish() {
+	$('#loading').hide();
+	$('#listview').fadeIn();
 }
 
 function updateContactPage() {
@@ -104,10 +130,14 @@ function updateContactPage() {
 	            	var fname = r.rows.item(i).fname;
 	                var lname = r.rows.item(i).lname;
 	                var phone = r.rows.item(i).phone;
+	                
+	                var fnameLetter = fname.substr(0,1);
+	                var lnameLetter = lname.substr(0,1);
+	                var pic = fnameLetter + lnameLetter;
 		
-	                contactFName.textContent = fname;
-	                contactLName.textContent = lname;
-	                contactPhone.textContent = phone;
+	                contactPic.text(pic);
+	                contactName.text(fname + ' ' + lname);
+	                contactPhone.text(phone);
 		        }
 		    },
 		    function (t, e) { alert("Error:" + e.message); }

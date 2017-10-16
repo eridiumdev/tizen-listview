@@ -1,13 +1,14 @@
-.thumbnail {
+.listview-thumbnail {
     display: inline-block;
-    padding: 8px;
-    border: 1px solid black;
+    padding: 12px 0;
+    width: 50px;
     border-radius: 45px;
-    background: black;
+    background: #3db9cc;
     color: white;
+    text-align: center;
 }
 
-.contact-text {
+.listview-text {
     margin-left: 15px;
 }
 
@@ -15,6 +16,38 @@
 	background-color: white;
 }
 
+#loading {
+    display: inline-block;
+    position: absolute;
+    top: 42%;
+    width: 100%;
+    text-align: center;
+    color: #3db9cc;
+}
+
+#contact-pic {
+    background-color: #3db9cc;
+    border-top: 1px solid #3db9cc;
+    color: white;
+    font-family: Consolas;
+    height: 242px;
+    margin-left: -48px;
+    line-height: 266px;
+    font-size: 393px;
+    font-weight: 900;
+}
+
+#contact-name, #contact-phone {
+	padding: 20px;
+}
+
+#contact-name {
+	margin-top: 20px;
+}
+
+.contact-text {
+	margin-left: 15px;
+}
 
 #back-button {
 	text-align: center;
@@ -22,5 +55,9 @@
 
 #back-button > a {
 	color: white;
-	background-color: black;
+    background-color: #3db9cc;
+    line-height: 0px;
+    height: 40px;
+    margin-top: 60px;
+    padding: 25px;
 }
