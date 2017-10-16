@@ -10,7 +10,7 @@ function createDb(contacts) {
     	// openDatabase(name, version, displayname, estimatedsize, callback);
         db = openDatabase(dbName, version, dbDisplayName, dbSize);
         
-        dropContactsTable(db);
+        // dropContactsTable(db);
         
         // Create and populate contacts table if it does not exist
         checkNotExists(db, 'contacts', function(notExists) {
