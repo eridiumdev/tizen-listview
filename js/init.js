@@ -4,12 +4,7 @@ function Contact(fname, lname, phone) {
     this.phone = phone;
 }
 
-var n = 10;
 var contacts = [];
-
-for (var i = 0; i < n; i++) {
-    // contacts[i] = new Contact(i + 'Name', i + 'Surname', '123-456-78' + i);
-}
 
 contacts[0] = new Contact('James', 'Darakjy', '123-456-789');
 contacts[1] = new Contact('Art', 'Venere', '123-456-789');
@@ -28,42 +23,4 @@ var contactFName = document.getElementById('fname');
 var contactLName = document.getElementById('lname');
 var contactPhone = document.getElementById('phone');
 
-init();
-
-function init() {
-    for (var i = 0; i < contacts.length; i++) {
-        // ul element
-        let li = document.createElement('li');
-        li.className = 'ui-li-anchor';
-
-        let a = document.createElement('a');
-        a.className = 'contacts';
-        a.id = i;
-        a.href = '#contact-page';
-
-        let pic = document.createElement('span');
-        pic.className = 'thumbnail';
-        let fnameLetter = contacts[i].fname.substr(0,1);
-        let lnameLetter = contacts[i].lname.substr(0,1);
-        pic.textContent = fnameLetter + lnameLetter;
-
-        let span = document.createElement('span');
-        span.className = 'contact-text';
-        span.textContent = contacts[i].fname + ' ' + contacts[i].lname;
-
-        a.append(pic);
-        a.append(span);
-        li.append(a);
-        listview.append(li);
-    }
-}
-
-$("a.contacts").each(function () {
-    $(this).on('click', function() {
-        // var href = $(this).attr('href');
-        var id = $(this).attr('id');
-        contactFName.textContent = contacts[id].fname;
-        contactLName.textContent = contacts[id].lname;
-        contactPhone.textContent = contacts[id].phone;
-    });
-});
+createDb(contacts);

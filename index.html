@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width,user-scalable=no"/>
-    <link rel="stylesheet"  href="./lib/tau/mobile/theme/default/tau.css">
+    <link rel="stylesheet" type="text/css" href="./lib/tau/mobile/theme/default/tau.css">
     <link rel="stylesheet" type="text/css" href="./css/styles.css"/>
     <title>Tizen Listview</title>
 </head>
-
 <body>
-    <div class="ui-page" id="contacts">
+    <div id="list-page" class="ui-page">
         <div class="ui-header">
             <h1>Contacts</h1>
         </div>
@@ -26,13 +24,14 @@
             <h2 id="fname">name</h2>
             <h3 id="lname">lname</h3>
             <h3 id="phone">phone</h3>
-            <p id="back-button"><a href="#contacts" class="ui-btn ui-inline">Back to contacts</a></p>
+            <p id="back-button"><a href="#list-page" class="ui-btn ui-inline">Back to contacts</a></p>
         </div>
-    </div>
-
+    </div>  
+    
 	<script type="text/javascript" src="./lib/tau/mobile/js/tau.js"></script>
-    <script src="./js/jquery.js"></script>
-    <script src="./js/init.js"></script>
-    <script src="./js/main.js"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/db.js"></script>
+    <script type="text/javascript" src="./js/init.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>
