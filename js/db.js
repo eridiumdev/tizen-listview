@@ -32,9 +32,11 @@ function checkNotExists(db, table, callback) {
 	db.readTransaction(function (t) {
         t.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", [table],
         	function(tran, r) {
-        		console.log('1');
-        		if (r.rows.length === 0) callback();
-        		else displayContacts(db);
+        		if (r.rows.length === 0) {
+        			callback();
+        		} else {
+        			displayContacts(db);
+        		}
         	},
         	function (t, e) { alert("Error:" + e.message); }
         );
@@ -49,14 +51,14 @@ function dropContactsTable(db) {
 
 function createContactsTable(db) {
     db.transaction(function (t) {
-        t.executeSql("CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, fname TEXT, lname TEXT, phone TEXT)", []);
+        t.executeSql("CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, fname TEXT, lname TEXT, phone TEXT, email TEXT)", []);
     });
 }
 
 function insertContact(db, contact) {
     db.transaction(function (t) {
-        t.executeSql("INSERT INTO contacts(fname, lname, phone) VALUES (?, ?, ?)",
-        		[contact.fname, contact.lname, contact.phone], onSuccess, onError);
+        t.executeSql("INSERT INTO contacts(fname, lname, phone, email) VALUES (?, ?, ?, ?)",
+        		[contact.fname, contact.lname, contact.phone, contact.email], onSuccess, onError);
     });
 }
 
@@ -71,14 +73,13 @@ function displayContacts(db) {
 	            	var id = r.rows.item(i).id;
 	            	var fname = r.rows.item(i).fname;
 	                var lname = r.rows.item(i).lname;
-	                var phone = r.rows.item(i).phone;
 	                
 	                // <li> for the listview
-	                let li = document.createElement('li');
+	                var li = document.createElement('li');
 	                li.className = 'ui-li-anchor';
 	
 	                // <a href=contact-page> for the <li>
-	                let a = document.createElement('a');
+	                var a = document.createElement('a');
 	                a.className = 'contacts';
 	                a.id = id;
 	                // go to contact details page if clicked
@@ -88,21 +89,21 @@ function displayContacts(db) {
 	
 	                // thumbnail (fname-lname first letters)
 	                // TODO change to profile pic
-	                let pic = document.createElement('span');
+	                var pic = document.createElement('span');
 	                pic.className = 'listview-thumbnail';
-	                let fnameLetter = fname.substr(0,1);
-	                let lnameLetter = lname.substr(0,1);
+	                var fnameLetter = fname.substr(0,1);
+	                var lnameLetter = lname.substr(0,1);
 	                pic.textContent = fnameLetter + lnameLetter;
 	
 	                // displayed name
-	                let span = document.createElement('span');
+	                var span = document.createElement('span');
 	                span.className = 'listview-text';
 	                span.textContent = fname + ' ' + lname;
 	
-	                a.append(pic);
-	                a.append(span);
-	                li.append(a);
-	                listview.append(li);
+	                $(a).append(pic);
+	                $(a).append(span);
+	                $(li).append(a);
+	                $(listview).append(li);
 	            }
 	        },
 	    	function (t, e) { alert("Error:" + e.message); }
@@ -130,6 +131,7 @@ function updateContactPage() {
 	            	var fname = r.rows.item(i).fname;
 	                var lname = r.rows.item(i).lname;
 	                var phone = r.rows.item(i).phone;
+	                var email = r.rows.item(i).email;
 	                
 	                var fnameLetter = fname.substr(0,1);
 	                var lnameLetter = lname.substr(0,1);
@@ -138,6 +140,7 @@ function updateContactPage() {
 	                contactPic.text(pic);
 	                contactName.text(fname + ' ' + lname);
 	                contactPhone.text(phone);
+	                contactEmail.text(email);
 		        }
 		    },
 		    function (t, e) { alert("Error:" + e.message); }

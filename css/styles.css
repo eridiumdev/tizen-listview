@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(https://fonts.gstatic.com/s/ubuntumono/v7/ViZhet7Ak-LRXZMXzuAfkY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
 .listview-thumbnail {
     display: inline-block;
     padding: 12px 0;
@@ -29,35 +37,39 @@
     background-color: #3db9cc;
     border-top: 1px solid #3db9cc;
     color: white;
-    font-family: Consolas;
-    height: 242px;
-    margin-left: -48px;
-    line-height: 266px;
-    font-size: 393px;
+    font-family: 'Ubuntu Mono', monospace;
+    height: 256px;
+    margin-left: -42px;
+    line-height: 279px;
+    font-size: 423px;
     font-weight: 900;
 }
 
-#contact-name, #contact-phone {
-	padding: 20px;
+#contact-info > div {
+	padding: 25px;
 }
 
-#contact-name {
-	margin-top: 20px;
+#contact-info span {
+	padding: 14px 2px;
 }
 
 .contact-text {
 	margin-left: 15px;
 }
 
-#back-button {
-	text-align: center;
+#contact-email .contact-text {
+	margin-left: 10px;
 }
 
-#back-button > a {
+#back-button {
+	position: absolute;
+	bottom: 300px;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 	color: white;
     background-color: #3db9cc;
-    line-height: 0px;
-    height: 40px;
-    margin-top: 60px;
-    padding: 25px;
+    padding: 16px;
 }

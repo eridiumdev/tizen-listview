@@ -13,22 +13,25 @@
             <h1>Contacts</h1>
         </div>
         <div class="ui-content">
-            <div id="loading" hidden><span class="fa fa-spinner fa-pulse fa-3x fa-fw"></span></div>
-            <ul id="listview" class="ui-listview" hidden></ul>
+            <div id="loading"><span class="fa fa-spinner fa-pulse fa-3x fa-fw"></span></div>
+            <ul id="listview" class="ui-listview"></ul>
         </div>
     </div>
 
     <div id="contact-page" class="ui-page">
-        <div id="contact-info" class="ui-content"">
-            <div id="contact-pic">pic</div>
+        <div id="contact-pic">pic</div>
+        <div id="contact-info" class="ui-content">
             <div id="contact-name"><span class="fa fa-user contact-icon"></span><span class="contact-text"></span></div>
             <div id="contact-phone"><span class="fa fa-phone contact-icon"></span><span class="contact-text"></span></div>
-            <p id="back-button"><a href="#" class="ui-btn ui-inline">Back to contacts</a></p>
+            <div id="contact-email"><span class="fa fa-envelope-open contact-icon"></span><span class="contact-text"></span></div>
+            <button id="back-button" class="ui-btn ui-inline">Back to contacts</button>
         </div>
     </div>  
     
 	<script type="text/javascript" src="./lib/tau/mobile/js/tau.js"></script>
-    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./lib/jquery.js"></script>
+    <script type="text/javascript" src="./js/d3.min.js"></script>
+    <script type="text/javascript" src="./js/contacts.js"></script>
     <script type="text/javascript" src="./js/db.js"></script>
     <script type="text/javascript" src="./js/init.js"></script>
     <script type="text/javascript" src="./js/main.js"></script>
